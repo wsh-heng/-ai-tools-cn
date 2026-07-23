@@ -3,673 +3,551 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI 工具中国可用性查询 - 能不能用，一查便知</title>
-<meta name="description" content="收录 80+ AI 工具的国内可用性、国内能不能用、国产替代品、价格对比。一查便知。">
+<title>AI 工具中国可用性查询 — 能不能用，一查便知</title>
+<meta name="description" content="收录 80+ AI 工具的国内可用性、国产替代品、价格对比。帮你找到能用的 AI 工具。">
 <style>
 :root {
-  --bg: #f5f5f7;
-  --card: #fff;
-  --text: #1d1d1f;
-  --sub: #6e6e73;
-  --border: #d2d2d7;
-  --green: #34c759;
-  --yellow: #ff9500;
-  --red: #ff3b30;
-  --accent: #0071e3;
-  --tag-bg: #f0f0f5;
+  --bg: #0b0b0f;
+  --card-bg: #131318;
+  --border: #1e1e28;
+  --text: #e4e4eb;
+  --sub: #8b8b98;
+  --accent: #6366f1;
+  --accent2: #818cf8;
+  --green: #22c55e;
+  --yellow: #f59e0b;
+  --red: #ef4444;
+  --green-bg: rgba(34,197,94,0.1);
+  --yellow-bg: rgba(245,158,11,0.1);
+  --red-bg: rgba(239,68,68,0.1);
+  --radius: 14px;
 }
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #1d1d1f;
-    --card: #2c2c2e;
-    --text: #f5f5f7;
-    --sub: #98989d;
-    --border: #48484a;
-    --tag-bg: #3a3a3c;
-  }
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;
+  background:var(--bg); color:var(--text); line-height:1.6;
+  min-height:100vh;
+  background-image:radial-gradient(ellipse at 50% 0%, rgba(99,102,241,0.08) 0%, transparent 60%);
 }
-* { margin:0; padding:0; box-sizing:border-box; }
-body {
-  font-family: -apple-system, 'PingFang SC','Microsoft YaHei',sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  line-height: 1.6;
-  min-height: 100vh;
+.container{max-width:1280px;margin:0 auto;padding:0 24px}
+
+/* Hero */
+.hero{
+  padding:48px 0 24px; text-align:center;
+}
+.hero h1{
+  font-size:clamp(28px,5vw,42px); font-weight:700; letter-spacing:-0.5px;
+  background:linear-gradient(135deg,#e4e4eb 0%,#6366f1 100%);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+}
+.hero p{color:var(--sub);font-size:16px;margin-top:8px;}
+
+/* Search */
+.search-wrap{
+  max-width:520px;margin:0 auto 20px;position:relative;
+}
+.search-wrap input{
+  width:100%;padding:14px 48px 14px 20px;border-radius:28px;
+  border:2px solid var(--border);background:var(--card-bg);color:var(--text);
+  font-size:15px;outline:none;transition:border .2s;
+}
+.search-wrap input:focus{border-color:var(--accent)}
+.search-wrap .s-icon{
+  position:absolute;right:18px;top:50%;transform:translateY(-50%);
+  font-size:18px;pointer-events:none;
 }
 
-/* Header */
-header {
-  background: var(--card);
-  border-bottom: 1px solid var(--border);
-  padding: 20px 0;
-  position: sticky; top:0; z-index:100;
-  backdrop-filter: blur(20px);
-  background: rgba(255,255,255,0.85);
+/* Filters */
+.filters{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:28px}
+.f-btn{
+  padding:7px 16px;border-radius:20px;border:1px solid var(--border);
+  background:var(--card-bg);color:var(--sub);font-size:13px;
+  cursor:pointer;transition:all .2s;white-space:nowrap;
 }
-@media (prefers-color-scheme: dark) { header { background: rgba(44,44,46,0.85); } }
-.header-inner {
-  max-width: 1200px; margin:0 auto; padding:0 20px;
-  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap:12px;
-}
-.logo { font-size: 20px; font-weight: 700; }
-.logo span { color: var(--accent); }
-.header-stats { font-size: 13px; color: var(--sub); display: flex; gap: 16px; flex-wrap: wrap; }
-.header-stats b { color: var(--text); }
+.f-btn:hover{border-color:var(--accent);color:var(--accent2)}
+.f-btn.on{background:var(--accent);color:#fff;border-color:var(--accent)}
 
-/* Main */
-main { max-width: 1200px; margin: 0 auto; padding: 24px 20px; }
+/* Stats */
+.stats{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:28px;
+}
+.s-card{
+  background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);
+  padding:20px;text-align:center;
+}
+.s-card .num{font-size:36px;font-weight:700}
+.s-card .lbl{font-size:12px;color:var(--sub);margin-top:4px}
+.s-card.ok .num{color:var(--green)}
+.s-card.mid .num{color:var(--yellow)}
+.s-card.bad .num{color:var(--red)}
 
-/* Search & Filters */
-.search-bar {
-  display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap;
-}
-.search-bar input {
-  flex: 1; min-width: 200px;
-  padding: 12px 18px; border-radius: 12px; border: 1px solid var(--border);
-  background: var(--card); color: var(--text); font-size: 15px; outline: none;
-  transition: border 0.2s;
-}
-.search-bar input:focus { border-color: var(--accent); }
-.filter-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
-.filter-tag {
-  padding: 6px 14px; border-radius: 20px; border: 1px solid var(--border);
-  background: var(--card); color: var(--sub); font-size: 13px;
-  cursor: pointer; transition: all 0.2s; white-space: nowrap;
-}
-.filter-tag:hover { border-color: var(--accent); color: var(--accent); }
-.filter-tag.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+/* Grid */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(370px,1fr));gap:14px}
 
-/* Stats Row */
-.stats-row {
-  display: grid; grid-template-columns: repeat(auto-fit,minmax(140px,1fr));
-  gap: 12px; margin-bottom: 24px;
+/* Card */
+.card{
+  background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);
+  padding:20px 22px;transition:all .2s;cursor:default;
+  display:flex;flex-direction:column;
 }
-.stat-card {
-  background: var(--card); border: 1px solid var(--border); border-radius: 12px;
-  padding: 16px; text-align: center;
+.card:hover{border-color:#333;transform:translateY(-1px);box-shadow:0 4px 24px rgba(0,0,0,.3)}
+.card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px}
+.card-name{font-size:17px;font-weight:600;color:#fff}
+.card-badge{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:4px 12px;border-radius:14px;font-size:11px;font-weight:500;white-space:nowrap;
 }
-.stat-card .num { font-size: 32px; font-weight: 700; }
-.stat-card .label { font-size: 12px; color: var(--sub); margin-top: 4px; }
-.stat-card.green .num { color: var(--green); }
-.stat-card.yellow .num { color: var(--yellow); }
-.stat-card.red .num { color: var(--red); }
+.badge-ok{background:var(--green-bg);color:var(--green)}
+.badge-mid{background:var(--yellow-bg);color:var(--yellow)}
+.badge-no{background:var(--red-bg);color:var(--red)}
+.card-cat{font-size:11px;color:var(--sub);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+.card-desc{font-size:13px;color:var(--sub);line-height:1.6;margin-bottom:14px;flex:1}
+.card-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;font-size:11px}
+.tag{padding:3px 10px;border-radius:10px;background:rgba(255,255,255,.04);color:var(--sub)}
+.tag a{color:var(--accent2);text-decoration:none}
+.tag a:hover{text-decoration:underline}
+.card-note{font-size:11px;color:#666;margin-bottom:10px;padding:8px 10px;background:rgba(255,255,255,.02);border-radius:8px}
 
-/* Tool Cards */
-.tools-grid {
-  display: grid; grid-template-columns: repeat(auto-fill,minmax(340px,1fr));
-  gap: 16px;
+/* Alts */
+.alts{
+  border-top:1px solid var(--border);padding-top:10px;margin-top:auto;
 }
-.tool-card {
-  background: var(--card); border: 1px solid var(--border); border-radius: 14px;
-  padding: 20px; transition: transform 0.2s, box-shadow 0.2s;
+.alts-title{font-size:11px;color:var(--green);font-weight:600;margin-bottom:8px}
+.alt-row{
+  display:flex;align-items:baseline;gap:8px;font-size:12px;margin-bottom:5px;
 }
-.tool-card:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.08); }
-.tool-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
-.tool-name { font-size: 17px; font-weight: 600; }
-.tool-cat { font-size: 11px; color: var(--sub); margin-bottom: 8px; }
-.tool-desc { font-size: 13px; color: var(--sub); margin-bottom: 12px; line-height: 1.5; }
-.tool-meta { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; font-size: 12px; }
-.badge {
-  display: inline-flex; align-items: center; gap:4px;
-  padding: 4px 10px; border-radius: 12px; font-size: 11px; font-weight: 500;
-}
-.badge-ok { background: rgba(52,199,89,0.15); color: var(--green); }
-.badge-mid { background: rgba(255,149,0,0.15); color: var(--yellow); }
-.badge-no { background: rgba(255,59,48,0.15); color: var(--red); }
-.badge-tag { background: var(--tag-bg); color: var(--sub); }
-.alt-section {
-  border-top: 1px solid var(--border); padding-top: 10px; margin-top: 4px;
-}
-.alt-title { font-size: 11px; color: var(--green); font-weight: 600; margin-bottom: 6px; }
-.alt-item { font-size: 12px; margin-bottom: 4px; display: flex; gap:6px; align-items: baseline; }
-.alt-item a { color: var(--accent); text-decoration: none; }
-.alt-item a:hover { text-decoration: underline; }
-.alt-note { font-size: 11px; color: var(--sub); }
-
-.price-row { display: flex; gap: 8px; font-size: 11px; color: var(--sub); margin-bottom: 8px; }
-.price-row b { color: var(--text); }
+.alt-row a{color:var(--accent2);text-decoration:none;font-weight:500;white-space:nowrap}
+.alt-row a:hover{text-decoration:underline}
+.alt-row span{color:var(--sub);font-size:11px}
 
 /* Footer */
-footer {
-  text-align: center; padding: 40px 20px; color: var(--sub); font-size: 12px;
-  border-top: 1px solid var(--border); margin-top: 40px;
+footer{
+  text-align:center;padding:40px 24px;color:var(--sub);font-size:12px;
+  border-top:1px solid var(--border);margin-top:40px;
 }
-footer a { color: var(--accent); }
+footer a{color:var(--accent2)}
 
-.no-results {
-  text-align: center; padding: 60px 20px; color: var(--sub);
-}
-.no-results .icon { font-size: 48px; margin-bottom: 12px; }
-
-@media (max-width: 768px) {
-  .tools-grid { grid-template-columns: 1fr; }
-  .header-stats { display: none; }
+@media(max-width:768px){
+  .grid{grid-template-columns:1fr}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .hero{padding:32px 0 20px}
 }
 </style>
 </head>
 <body>
 
-<header>
-  <div class="header-inner">
-    <div class="logo">🔍 AI<span>中国</span>可用性查询</div>
-    <div class="header-stats" id="header-stats">加载中...</div>
+<div class="container">
+  <!-- Hero -->
+  <div class="hero">
+    <h1>AI 工具中国可用性查询</h1>
+    <p>收录 <span id="total-count">0</span> 个 AI 工具 · 国内能不能用 · 国产替代推荐 · 价格对比</p>
   </div>
-</header>
 
-<main>
   <!-- Search -->
-  <div class="search-bar">
-    <input type="text" id="search" placeholder="搜索 AI 工具名称... 比如 ChatGPT、Midjourney、Claude" oninput="render()">
+  <div class="search-wrap">
+    <input type="text" id="search" placeholder="搜索 AI 工具... 如 ChatGPT、Midjourney、可灵" oninput="render()">
+    <span class="s-icon">🔍</span>
   </div>
 
-  <!-- Category Filters -->
-  <div class="filter-tags" id="filters"></div>
+  <!-- Filters -->
+  <div class="filters" id="filters"></div>
 
   <!-- Stats -->
-  <div class="stats-row" id="stats-row"></div>
+  <div class="stats" id="stats"></div>
 
-  <!-- Results -->
-  <div class="tools-grid" id="tools-grid"></div>
-  <div class="no-results" id="no-results" style="display:none;">
-    <div class="icon">🔎</div>
-    <div>没有找到匹配的工具</div>
-    <div style="font-size:12px;margin-top:4px;">试试换个关键词</div>
-  </div>
-</main>
+  <!-- Cards -->
+  <div class="grid" id="grid"></div>
+</div>
 
 <footer>
-  <p>数据持续更新 · 最后更新 2026年7月 · 保留所有工具原作者权利</p>
-  <p style="margin-top:4px;">发现遗漏或错误？<a href="https://github.com">GitHub Issues</a> 欢迎贡献</p>
+  <p>数据持续更新 · 2026年7月 · 工具信息如有变动请提 Issue</p>
+  <p style="margin-top:4px"><a href="https://github.com/wsh-heng/-ai-tools-cn" target="_blank">GitHub</a> · MIT License</p>
 </footer>
 
 <script>
-// ===== DATA =====
 const tools = [
   // ---- 大语言模型 ----
-  { name:'ChatGPT', cat:'大语言模型', acc:'no', priceUSD:'$20/月', priceCNY:'¥200/月',
-    desc:'OpenAI 的旗舰聊天模型，GPT-5 系列。代码、写作、分析能力全球顶尖。',
-    url:'chatgpt.com', vpn:'🔒 需特殊网络，且需国外手机号注册',
+  { name:'ChatGPT', cat:'大语言模型', acc:'no', price:'¥200/月 ($20)',
+    desc:'OpenAI 旗舰。GPT-5 系列，代码、写作、分析能力全球顶尖。国内无法直接访问。',
+    note:'需国外手机号注册，且需特殊网络环境',
     alts:[
-      { name:'通义千问', url:'tongyi.aliyun.com', note:'阿里出品，中文更强，免费' },
-      { name:'Kimi', url:'kimi.moonshot.cn', note:'长上下文，200万字，免费' },
-      { name:'豆包', url:'www.doubao.com', note:'字节跳动出品，多模态，免费' },
-      { name:'DeepSeek', url:'chat.deepseek.com', note:'开源模型，代码能力强，免费' },
+      { name:'通义千问', url:'https://tongyi.aliyun.com', note:'阿里出品，中文更强，免费' },
+      { name:'Kimi', url:'https://kimi.moonshot.cn', note:'200万字超长上下文，免费' },
+      { name:'豆包', url:'https://www.doubao.com', note:'字节跳动，多模态，免费' },
+      { name:'DeepSeek', url:'https://chat.deepseek.com', note:'代码能力强，免费' },
     ]},
-  { name:'Claude', cat:'大语言模型', acc:'no', priceUSD:'$20/月', priceCNY:'¥140/月',
-    desc:'Anthropic 的旗舰模型。Opus 4.8 编程能力顶尖，100万 token 上下文。',
-    url:'claude.ai', vpn:'🔒 需特殊网络',
+  { name:'Claude', cat:'大语言模型', acc:'no', price:'¥140/月 ($20)',
+    desc:'Anthropic 旗舰。Opus 4.8 编程顶尖，100万 token 上下文。国内无法直接访问。',
+    note:'需特殊网络环境，注册可能需海外手机号',
     alts:[
-      { name:'通义千问', url:'tongyi.aliyun.com', note:'综合能力接近，免费' },
-      { name:'Kimi', url:'kimi.moonshot.cn', note:'超长上下文是特色' },
+      { name:'通义千问', url:'https://tongyi.aliyun.com', note:'综合能力强，免费' },
+      { name:'DeepSeek', url:'https://chat.deepseek.com', note:'代码能力接近，免费' },
     ]},
-  { name:'Gemini', cat:'大语言模型', acc:'no', priceUSD:'免费/$20', priceCNY:'免费',
-    desc:'Google 多模态模型。深度整合 Google 搜索、YouTube、Gmail。',
-    url:'gemini.google.com', vpn:'🔒 需特殊网络',
-    alts:[
-      { name:'豆包', url:'www.doubao.com', note:'多模态能力接近，免费' },
-    ]},
-  { name:'通义千问', cat:'大语言模型', acc:'yes', priceUSD:'免费', priceCNY:'免费',
-    desc:'阿里云出品。代码、写作、多模态全能，与阿里生态深度整合。',
-    url:'tongyi.aliyun.com', vpn:'无需',
+  { name:'Gemini', cat:'大语言模型', acc:'no', price:'免费',
+    desc:'Google 多模态模型。深度整合搜索、YouTube、Gmail。国内无法直接访问。',
+    note:'需特殊网络环境',
+    alts:[{ name:'豆包', url:'https://www.doubao.com', note:'多模态能力接近，免费' }]},
+  { name:'通义千问', cat:'大语言模型', acc:'yes', price:'免费',
+    desc:'阿里云出品。代码、写作、多模态全能，阿里生态深度整合。国内直接可用。',
+    note:'国内直接访问，无需任何特殊设置',
     alts:[] },
-  { name:'Kimi', cat:'大语言模型', acc:'yes', priceUSD:'免费', priceCNY:'免费',
-    desc:'月之暗面出品。200万字超长上下文，读论文、分析长文档神器。',
-    url:'kimi.moonshot.cn', vpn:'无需',
+  { name:'Kimi', cat:'大语言模型', acc:'yes', price:'免费',
+    desc:'月之暗面出品。200万字超长上下文，读论文、分析长文档神器。国内直接可用。',
+    note:'国内直接访问',
     alts:[] },
-  { name:'豆包', cat:'大语言模型', acc:'yes', priceUSD:'免费', priceCNY:'免费',
-    desc:'字节跳动 AI 助手。多模态、语音通话、图片理解，抖音生态整合。',
-    url:'www.doubao.com', vpn:'无需',
+  { name:'豆包', cat:'大语言模型', acc:'yes', price:'免费',
+    desc:'字节跳动 AI。多模态、语音通话、图片理解，抖音生态整合。国内直接可用。',
+    note:'国内直接访问',
     alts:[] },
-  { name:'DeepSeek', cat:'大语言模型', acc:'yes', priceUSD:'免费', priceCNY:'免费',
-    desc:'深度求索出品。开源模型，代码能力极强，API 价格极低。',
-    url:'chat.deepseek.com', vpn:'无需',
+  { name:'DeepSeek', cat:'大语言模型', acc:'yes', price:'免费',
+    desc:'深度求索出品。开源模型，代码能力极强，API 价格低至行业最低。国内直接可用。',
+    note:'国内直接访问',
     alts:[] },
-  { name:'文心一言', cat:'大语言模型', acc:'yes', priceUSD:'免费', priceCNY:'免费',
-    desc:'百度 AI 助手。搜索整合好，中文理解深入，百度生态联动。',
-    url:'yiyan.baidu.com', vpn:'无需',
+  { name:'文心一言', cat:'大语言模型', acc:'yes', price:'免费',
+    desc:'百度 AI。搜索整合好，中文理解深入，百度生态联动。国内直接可用。',
+    note:'国内直接访问',
     alts:[] },
-  { name:'Grok', cat:'大语言模型', acc:'no', priceUSD:'$8/月', priceCNY:'¥58/月',
-    desc:'xAI（马斯克）出品。实时访问 X/Twitter 数据，风格犀利。',
-    url:'grok.com', vpn:'🔒 需特殊网络',
-    alts:[{ name:'DeepSeek', url:'chat.deepseek.com', note:'开源免费，代码能力强' }] },
+  { name:'讯飞星火', cat:'大语言模型', acc:'yes', price:'免费',
+    desc:'科大讯飞出品。语音识别+大模型一体，教育、办公场景强。国内直接可用。',
+    note:'国内直接访问',
+    alts:[] },
+  { name:'智谱清言', cat:'大语言模型', acc:'yes', price:'免费',
+    desc:'智谱AI（清华系）。ChatGLM 模型，学术背景，代码能力好。国内直接可用。',
+    note:'国内直接访问',
+    alts:[] },
+  { name:'腾讯元宝', cat:'大语言模型', acc:'yes', price:'免费',
+    desc:'腾讯 AI 助手。公众号内容搜索是独家优势，微信生态整合。国内直接可用。',
+    note:'国内直接访问',
+    alts:[] },
+  { name:'腾讯混元', cat:'大语言模型', acc:'yes', price:'免费',
+    desc:'腾讯大模型。与微信/企微深度整合，腾讯云生态。国内直接可用。',
+    note:'国内直接访问',
+    alts:[] },
+  { name:'百川智能', cat:'大语言模型', acc:'yes', price:'免费',
+    desc:'王小川出品。医疗、法律垂直领域强。国内直接可用。',
+    note:'国内直接访问',
+    alts:[] },
+  { name:'Grok', cat:'大语言模型', acc:'no', price:'¥58/月 ($8)',
+    desc:'xAI（马斯克）出品。实时访问 X/Twitter 数据，风格犀利。国内无法直接访问。',
+    note:'需特殊网络环境',
+    alts:[{ name:'DeepSeek', url:'https://chat.deepseek.com', note:'开源免费，代码强' }] },
 
-  // ---- AI 图像生成 ----
-  { name:'Midjourney', cat:'AI图像', acc:'no', priceUSD:'$10/月', priceCNY:'¥72/月',
-    desc:'AI 图像生成标杆。艺术感最强，V7 模型写实和创意都是顶级。',
-    url:'midjourney.com', vpn:'🔒 需特殊网络，通过 Discord 使用',
+  // ---- AI 图像 ----
+  { name:'Midjourney', cat:'AI图像', acc:'no', price:'¥72/月 ($10)',
+    desc:'AI 图像标杆。V7 模型艺术感最强，写实和创意都是顶级。国内无法直接访问。',
+    note:'需特殊网络环境 + Discord 账号',
     alts:[
-      { name:'通义万相', url:'tongyi.aliyun.com/wanxiang', note:'阿里出品，免费额度大' },
-      { name:'即梦', url:'jimeng.jianying.com', note:'字节出品，和抖音打通，免费' },
-      { name:'LiblibAI', url:'www.liblib.ai', note:'国内最大 SD 模型社区' },
+      { name:'通义万相', url:'https://tongyi.aliyun.com/wanxiang', note:'阿里出品，免费额度大' },
+      { name:'即梦', url:'https://jimeng.jianying.com', note:'字节出品，免费' },
+      { name:'LiblibAI', url:'https://www.liblib.ai', note:'国内最大 SD 社区' },
     ]},
-  { name:'Stable Diffusion', cat:'AI图像', acc:'partial', priceUSD:'免费', priceCNY:'免费',
-    desc:'开源图像生成模型。本地运行，完全免费，可控性最强。需 ComfyUI 或 WebUI。',
-    url:'stability.ai', vpn:'模型下载可能慢，但 HuggingFace 镜像可用',
+  { name:'Stable Diffusion', cat:'AI图像', acc:'partial', price:'免费',
+    desc:'开源图像生成。本地运行，完全免费，可控性最强。国内部分可用。',
+    note:'模型下载可能需特殊网络，HuggingFace 镜像可用。搭配 ComfyUI 最佳',
     alts:[
-      { name:'LiblibAI', url:'www.liblib.ai', note:'在线 SD，免部署，免费额度' },
+      { name:'LiblibAI', url:'https://www.liblib.ai', note:'在线 SD，免部署，免费额度' },
     ]},
-  { name:'DALL·E 3', cat:'AI图像', acc:'no', priceUSD:'含 ChatGPT', priceCNY:'含 ChatGPT',
-    desc:'OpenAI 图像生成。文字渲染最强，与 ChatGPT 深度整合。',
-    url:'chatgpt.com', vpn:'🔒 需特殊网络',
-    alts:[{ name:'通义万相', url:'tongyi.aliyun.com/wanxiang', note:'文字渲染也不错' }] },
-  { name:'通义万相', cat:'AI图像', acc:'yes', priceUSD:'免费', priceCNY:'免费',
-    desc:'阿里 AI 图像生成。文生图、图生图、风格迁移，免费额度大。',
-    url:'tongyi.aliyun.com/wanxiang', vpn:'无需',
+  { name:'ComfyUI', cat:'AI图像', acc:'yes', price:'免费',
+    desc:'AI 图像工作流编辑器。节点式编排，自定义管线，专业用户首选。国内直接可用。',
+    note:'本地安装，GitHub 可能慢但 Gitee 有镜像',
     alts:[] },
-  { name:'即梦', cat:'AI图像', acc:'yes', priceUSD:'免费', priceCNY:'免费',
-    desc:'字节跳动出品。文生图、图生图，与抖音/剪映打通，创作者友好。',
-    url:'jimeng.jianying.com', vpn:'无需',
+  { name:'DALL·E 3', cat:'AI图像', acc:'no', price:'含 ChatGPT',
+    desc:'OpenAI 图像生成。文字渲染最强，与 ChatGPT 深度整合。国内无法直接访问。',
+    note:'需特殊网络环境',
+    alts:[{ name:'通义万相', url:'https://tongyi.aliyun.com/wanxiang', note:'文字渲染也不错' }] },
+  { name:'通义万相', cat:'AI图像', acc:'yes', price:'免费',
+    desc:'阿里 AI 图像生成。文生图、图生图、风格迁移，免费额度大。国内直接可用。',
+    note:'国内直接访问',
     alts:[] },
-  { name:'文心一格', cat:'AI图像', acc:'yes', priceUSD:'免费', priceCNY:'免费',
-    desc:'百度 AI 艺术平台。文生图、风格定制，中文提示词友好。',
-    url:'yige.baidu.com', vpn:'无需',
+  { name:'即梦', cat:'AI图像', acc:'yes', price:'免费',
+    desc:'字节跳动 AI 图像。文生图、图生图，与抖音/剪映打通。国内直接可用。',
+    note:'国内直接访问',
     alts:[] },
-  { name:'ComfyUI', cat:'AI图像', acc:'yes', priceUSD:'免费', priceCNY:'免费',
-    desc:'AI 图像工作流编辑器。节点式编排，自定义管线，专业用户首选。本地安装。',
-    url:'github.com/comfyanonymous/ComfyUI', vpn:'GitHub 可能慢，Gitee 有镜像',
+  { name:'文心一格', cat:'AI图像', acc:'yes', price:'免费',
+    desc:'百度 AI 艺术平台。中文提示词友好。国内直接可用。',
+    note:'国内直接访问',
+    alts:[] },
+  { name:'Leonardo AI', cat:'AI图像', acc:'no', price:'¥86/月 ($12)',
+    desc:'游戏资产生成专用。角色、场景、道具一站式。国内无法直接访问。',
+    note:'需特殊网络环境',
+    alts:[{ name:'LiblibAI', url:'https://www.liblib.ai', note:'国内最大 SD 社区' }] },
+  { name:'Civitai', cat:'AI图像', acc:'no', price:'免费',
+    desc:'全球最大 AI 模型社区。SD Checkpoint/LoRA 下载。国内无法直接访问。',
+    note:'需特殊网络环境',
+    alts:[{ name:'LiblibAI', url:'https://www.liblib.ai', note:'国内模型下载首选' }] },
+
+  // ---- AI 视频 ----
+  { name:'Sora', cat:'AI视频', acc:'no', price:'¥143/月 ($20)',
+    desc:'OpenAI 视频生成。画质最高、物理理解强。国内无法直接访问。',
+    note:'需特殊网络环境，排队较久',
+    alts:[
+      { name:'可灵', url:'https://kling.kuaishou.com', note:'快手出品，效果接近，免费' },
+      { name:'即梦', url:'https://jimeng.jianying.com', note:'字节出品，免费' },
+    ]},
+  { name:'可灵', cat:'AI视频', acc:'yes', price:'免费',
+    desc:'快手 AI 视频生成。效果不输 Sora，免费额度。国内直接可用。',
+    note:'国内直接访问',
+    alts:[] },
+  { name:'即梦视频', cat:'AI视频', acc:'yes', price:'免费',
+    desc:'字节跳动 AI 视频。文生视频、图生视频，剪映内置。国内直接可用。',
+    note:'国内直接访问',
+    alts:[] },
+  { name:'Runway', cat:'AI视频', acc:'no', price:'¥108/月 ($15)',
+    desc:'专业 AI 视频编辑。Gen-4 模型，好莱坞级工具。国内无法直接访问。',
+    note:'需特殊网络环境',
+    alts:[{ name:'可灵', url:'https://kling.kuaishou.com', note:'效果接近，免费' }] },
+  { name:'HeyGen', cat:'AI视频', acc:'no', price:'¥208/月 ($29)',
+    desc:'AI 数字人视频。照片生成说话视频，口型同步领先。国内无法直接访问。',
+    note:'需特殊网络环境',
+    alts:[{ name:'智影', url:'https://zenvideo.qq.com', note:'腾讯出品，数字人免费' }] },
+  { name:'智影', cat:'AI视频', acc:'yes', price:'免费',
+    desc:'腾讯 AI 数字人。虚拟主播、数字人播报。国内直接可用。',
+    note:'国内直接访问',
+    alts:[] },
+  { name:'Wan', cat:'AI视频', acc:'yes', price:'开源免费',
+    desc:'阿里开源视频生成模型。效果优秀，可本地部署。国内直接可用。',
+    note:'模型可下载，国内镜像',
     alts:[] },
 
-  // ---- AI 视频生成 ----
-  { name:'Sora', cat:'AI视频', acc:'no', priceUSD:'$20/月', priceCNY:'¥143/月',
-    desc:'OpenAI 视频生成。画质最高、物理理解强，但排队久。',
-    url:'sora.com', vpn:'🔒 需特殊网络',
+  // ---- AI 编程 ----
+  { name:'Claude Code', cat:'AI编程', acc:'partial', price:'¥140/月 ($20)',
+    desc:'Anthropic 终端 AI 编程。Opus 4.8，100万上下文，编程能力顶尖。国内部分可用。',
+    note:'CLI 可用，API Key 申请需特殊网络。Pro 订阅每月额度有限',
     alts:[
-      { name:'可灵', url:'kling.kuaishou.com', note:'快手出品，效果接近，免费额度' },
-      { name:'即梦', url:'jimeng.jianying.com', note:'字节出品，视频生成+' },
+      { name:'通义灵码', url:'https://tongyi.aliyun.com/lingma', note:'阿里出品，免费，IDE 插件' },
+      { name:'Cursor', url:'https://cursor.com', note:'类似体验，VS Code 分支' },
     ]},
-  { name:'可灵', cat:'AI视频', acc:'yes', priceUSD:'免费', priceCNY:'免费',
-    desc:'快手 AI 视频生成。效果不输 Sora，国内直接能用，免费额度。',
-    url:'kling.kuaishou.com', vpn:'无需',
+  { name:'Cursor', cat:'AI编程', acc:'partial', price:'¥143/月 ($20)',
+    desc:'AI-first 代码编辑器。多模型支持，Agent 模式。国内部分可用。',
+    note:'编辑器国内可用，账号注册可能需特殊网络',
+    alts:[{ name:'通义灵码', url:'https://tongyi.aliyun.com/lingma', note:'免费替代' }] },
+  { name:'GitHub Copilot', cat:'AI编程', acc:'partial', price:'¥72/月 ($10)',
+    desc:'GitHub AI 代码补全。VS Code/JetBrains 插件，补全最流畅。国内部分可用。',
+    note:'注册需特殊网络，使用时可直连但不稳定',
+    alts:[{ name:'通义灵码', url:'https://tongyi.aliyun.com/lingma', note:'完全免费' }] },
+  { name:'OpenAI Codex', cat:'AI编程', acc:'no', price:'¥143/月 ($20)',
+    desc:'OpenAI 终端编程 Agent。GPT-5.5 驱动。国内无法直接访问。',
+    note:'需特殊网络环境',
+    alts:[{ name:'Claude Code', url:'https://code.claude.com', note:'SWE-bench Pro 更强' }] },
+  { name:'通义灵码', cat:'AI编程', acc:'yes', price:'免费',
+    desc:'阿里 AI 代码助手。VS Code/JetBrains 插件，代码补全、解释、生成。国内直接可用。',
+    note:'国内直接访问，完全免费',
     alts:[] },
-  { name:'即梦视频', cat:'AI视频', acc:'yes', priceUSD:'免费', priceCNY:'免费',
-    desc:'字节跳动 AI 视频。文生视频、图生视频，剪映内直接使用。',
-    url:'jimeng.jianying.com', vpn:'无需',
+  { name:'Windsurf', cat:'AI编程', acc:'no', price:'¥108/月 ($15)',
+    desc:'Codeium 出品 AI IDE。Flow 模式自动分析全仓库。国内无法直接访问。',
+    note:'需特殊网络环境',
+    alts:[{ name:'Cursor', url:'https://cursor.com', note:'类似体验' }] },
+  { name:'v0.dev', cat:'AI编程', acc:'no', price:'¥143/月 ($20)',
+    desc:'Vercel 出品。自然语言生成前端 UI，React/Tailwind 一键复制。国内无法直接访问。',
+    note:'需特殊网络环境',
     alts:[] },
-  { name:'Runway', cat:'AI视频', acc:'no', priceUSD:'$15/月', priceCNY:'¥108/月',
-    desc:'专业 AI 视频编辑。Gen-4 模型，视频质量高，好莱坞级工具。',
-    url:'runwayml.com', vpn:'🔒 需特殊网络',
-    alts:[{ name:'可灵', url:'kling.kuaishou.com', note:'效果接近，免费' }] },
-  { name:'Pika', cat:'AI视频', acc:'no', priceUSD:'$10/月', priceCNY:'¥72/月',
-    desc:'AI 视频生成工具。Lip Sync 口型同步是特色。',
-    url:'pika.art', vpn:'🔒 需特殊网络',
-    alts:[{ name:'即梦', url:'jimeng.jianying.com', note:'功能全面' }] },
-  { name:'Wan', cat:'AI视频', acc:'yes', priceUSD:'开源免费', priceCNY:'免费',
-    desc:'阿里开源视频生成模型。效果优秀，可本地部署。',
-    url:'github.com', vpn:'镜像可用',
+  { name:'Bolt.new', cat:'AI编程', acc:'no', price:'¥143/月 ($20)',
+    desc:'StackBlitz 出品。一句话生成全栈 Web 应用。国内无法直接访问。',
+    note:'需特殊网络环境',
     alts:[] },
-
-  // ---- AI 编程工具 ----
-  { name:'Claude Code', cat:'AI编程', acc:'partial', priceUSD:'$20/月', priceCNY:'¥140/月',
-    desc:'Anthropic 终端 AI 编程助手。1M 上下文，Opus 4.8 模型，编程能力顶尖。',
-    url:'code.claude.com', vpn:'CLI 可用但需 API Key，注册🔒 需特殊网络',
-    alts:[
-      { name:'通义灵码', url:'tongyi.aliyun.com/lingma', note:'阿里出品，免费，IDE 插件' },
-      { name:'Cursor', url:'cursor.com', note:'VS Code 分支，部分功能国内可用' },
-    ]},
-  { name:'Cursor', cat:'AI编程', acc:'partial', priceUSD:'$20/月', priceCNY:'¥143/月',
-    desc:'AI-first 代码编辑器（VS Code 分支）。多模型支持，Agent 模式。',
-    url:'cursor.com', vpn:'编辑器国内可用，但账号注册🔒 需特殊网络',
-    alts:[{ name:'通义灵码', url:'tongyi.aliyun.com/lingma', note:'免费替代' }] },
-  { name:'GitHub Copilot', cat:'AI编程', acc:'partial', priceUSD:'$10/月', priceCNY:'¥72/月',
-    desc:'GitHub AI 代码补全。深度整合 VS Code/JetBrains，自动补全最流畅。',
-    url:'github.com/features/copilot', vpn:'🔒 需特殊网络注册 GitHub，但使用时可直连（不稳定）',
-    alts:[{ name:'通义灵码', url:'tongyi.aliyun.com/lingma', note:'完全免费的平替' }] },
-  { name:'OpenAI Codex', cat:'AI编程', acc:'no', priceUSD:'$20/月', priceCNY:'¥143/月',
-    desc:'OpenAI 终端编程 Agent。GPT-5.5 驱动，Terminal-Bench 领先。',
-    url:'chatgpt.com/codex', vpn:'🔒 需特殊网络',
-    alts:[{ name:'Claude Code', url:'code.claude.com', note:'SWE-bench Pro 更强' }] },
-  { name:'通义灵码', cat:'AI编程', acc:'yes', priceUSD:'免费', priceCNY:'免费',
-    desc:'阿里 AI 代码助手。VS Code/JetBrains 插件，代码补全、解释、生成。',
-    url:'tongyi.aliyun.com/lingma', vpn:'无需',
+  { name:'Hugging Face', cat:'AI编程', acc:'no', price:'免费',
+    desc:'全球最大 AI 模型库。百万模型/数据集。国内无法直接访问。',
+    note:'需特殊网络环境',
+    alts:[{ name:'ModelScope', url:'https://modelscope.cn', note:'阿里出品，国内可用' }] },
+  { name:'ModelScope', cat:'AI编程', acc:'yes', price:'免费',
+    desc:'阿里魔搭社区。国内最大 AI 模型库，千款模型免费下载。国内直接可用。',
+    note:'国内直接访问',
     alts:[] },
-  { name:'DeepSeek Coder', cat:'AI编程', acc:'yes', priceUSD:'免费', priceCNY:'免费',
-    desc:'深度求索代码模型。开源，API 极便宜，代码能力强。',
-    url:'platform.deepseek.com', vpn:'无需',
+  { name:'Replit Agent', cat:'AI编程', acc:'no', price:'¥180/月 ($25)',
+    desc:'Replit AI。说人话→写完整应用，在线 IDE 一键部署。国内无法直接访问。',
+    note:'需特殊网络环境',
     alts:[] },
 
   // ---- AI 3D/游戏 ----
-  { name:'Rodin', cat:'AI 3D/游戏', acc:'partial', priceUSD:'$20/月', priceCNY:'¥143/月',
-    desc:'AI 3D 模型生成。文字/图片转 3D，质量在同类中最好，游戏开发友好。',
-    url:'hyperhuman.deemos.com', vpn:'网站可能慢，但可访问',
-    alts:[{ name:'Meshy', url:'meshy.ai', note:'可访问，有免费额度' }] },
-  { name:'Meshy', cat:'AI 3D/游戏', acc:'yes', priceUSD:'免费/付费', priceCNY:'免费',
-    desc:'AI 3D 资产生成。文字/图片转 3D、贴图生成，游戏开发常用。',
-    url:'meshy.ai', vpn:'无需',
+  { name:'Rodin', cat:'AI 3D/游戏', acc:'partial', price:'¥143/月 ($20)',
+    desc:'AI 3D 模型生成。文字/图片转 3D，游戏开发友好。国内部分可用。',
+    note:'网站可能慢，但通常可访问',
+    alts:[{ name:'Meshy', url:'https://meshy.ai', note:'免费额度' }] },
+  { name:'Meshy', cat:'AI 3D/游戏', acc:'yes', price:'免费/付费',
+    desc:'AI 3D 资产生成。文字/图片转 3D、贴图生成。国内直接可用。',
+    note:'国内可直接访问',
     alts:[] },
-  { name:'Luma AI', cat:'AI 3D/游戏', acc:'no', priceUSD:'免费/付费', priceCNY:'免费',
-    desc:'NeRF/3D Gaussian Splatting。手机扫描生成 3D 场景。',
-    url:'lumalabs.ai', vpn:'🔒 需特殊网络',
-    alts:[{ name:'Meshy', url:'meshy.ai', note:'3D 资产生成替代' }] },
-  { name:'Unity AI', cat:'AI 3D/游戏', acc:'yes', priceUSD:'免费/付费', priceCNY:'免费',
-    desc:'Unity 引擎内置 AI 工具。AI 助手、生成器、Sentis 推理引擎。',
-    url:'unity.com/ai', vpn:'引擎国内可用，Asset Store 有时慢',
+  { name:'Luma AI', cat:'AI 3D/游戏', acc:'no', price:'免费/付费',
+    desc:'NeRF/3D GS。手机扫描生成 3D 场景。国内无法直接访问。',
+    note:'需特殊网络环境',
+    alts:[{ name:'Meshy', url:'https://meshy.ai', note:'3D 资产生成替代' }] },
+  { name:'Unity AI', cat:'AI 3D/游戏', acc:'yes', price:'免费/付费',
+    desc:'Unity 内置 AI 工具。AI 助手、生成器、Sentis 推理引擎。国内直接可用。',
+    note:'引擎国内可用，Asset Store 有时慢',
     alts:[] },
-  { name:'Cascadeur', cat:'AI 3D/游戏', acc:'yes', priceUSD:'免费/付费', priceCNY:'免费',
-    desc:'AI 辅助 3D 动画软件。AI 自动补间、物理修正，游戏动作师最爱。',
-    url:'cascadeur.com', vpn:'无需',
+  { name:'Cascadeur', cat:'AI 3D/游戏', acc:'yes', price:'免费/付费',
+    desc:'AI 辅助 3D 动画。AI 自动补间、物理修正。国内直接可用。',
+    note:'国内可直接访问',
     alts:[] },
-  { name:'Move One', cat:'AI 3D/游戏', acc:'yes', priceUSD:'免费', priceCNY:'免费',
-    desc:'AI 动作捕捉。单摄像头视频转 3D 骨骼动画，独立游戏神器。',
-    url:'move.ai', vpn:'无需',
+  { name:'Move One', cat:'AI 3D/游戏', acc:'yes', price:'免费',
+    desc:'AI 动作捕捉。视频转 3D 骨骼动画。国内直接可用。',
+    note:'国内可直接访问',
     alts:[] },
+  { name:'Inworld AI', cat:'AI 3D/游戏', acc:'no', price:'免费/付费',
+    desc:'游戏 NPC AI 引擎。性格、记忆、实时对话。国内无法直接访问。',
+    note:'需特殊网络环境',
+    alts:[{ name:'Dify', url:'https://dify.ai', note:'自建 NPC 对话' }] },
+  { name:'NVIDIA ACE', cat:'AI 3D/游戏', acc:'no', price:'按量',
+    desc:'NVIDIA 游戏 AI。数字人+NPC+实时语音，RTX 加持。国内无法直接访问。',
+    note:'需特殊网络环境',
+    alts:[] },
+  { name:'Scenario', cat:'AI 3D/游戏', acc:'no', price:'免费/付费',
+    desc:'AI 游戏资产生成。训练自己的风格模型。国内无法直接访问。',
+    note:'需特殊网络环境',
+    alts:[{ name:'LiblibAI', url:'https://www.liblib.ai', note:'LoRA 训练替代' }] },
 
-  // ---- AI 音频/语音 ----
-  { name:'ElevenLabs', cat:'AI音频', acc:'no', priceUSD:'$5/月', priceCNY:'¥36/月',
-    desc:'AI 语音合成标杆。声音克隆、多语言 TTS，29 种语言。',
-    url:'elevenlabs.io', vpn:'🔒 需特殊网络',
-    alts:[{ name:'海螺AI', url:'hailuoai.com', note:'语音合成免费' }] },
-  { name:'Suno', cat:'AI音频', acc:'no', priceUSD:'$10/月', priceCNY:'¥72/月',
-    desc:'AI 音乐生成。文字描述生成完整歌曲，V4 音质大幅提升。',
-    url:'suno.com', vpn:'🔒 需特殊网络',
-    alts:[{ name:'海绵音乐', url:'haimian.com', note:'字节出品，国内可用' }] },
-  { name:'Udio', cat:'AI音频', acc:'no', priceUSD:'$10/月', priceCNY:'¥72/月',
-    desc:'AI 音乐生成。音质最干净，支持人声+伴奏分离。',
-    url:'udio.com', vpn:'🔒 需特殊网络',
-    alts:[{ name:'海绵音乐', url:'haimian.com', note:'免费替代' }] },
-  { name:'海螺AI', cat:'AI音频', acc:'yes', priceUSD:'免费', priceCNY:'免费',
-    desc:'MiniMax 出品。AI 语音合成、克隆，中文效果一流。',
-    url:'hailuoai.com', vpn:'无需',
+  // ---- AI 音频 ----
+  { name:'ElevenLabs', cat:'AI音频', acc:'no', price:'¥36/月 ($5)',
+    desc:'AI 语音合成标杆。声音克隆、多语言 TTS，29 种语言。国内无法直接访问。',
+    note:'需特殊网络环境',
+    alts:[{ name:'海螺AI', url:'https://hailuoai.com', note:'语音合成免费' }] },
+  { name:'Suno', cat:'AI音频', acc:'no', price:'¥72/月 ($10)',
+    desc:'AI 音乐生成。文字→完整歌曲，V4 音质大幅提升。国内无法直接访问。',
+    note:'需特殊网络环境',
+    alts:[{ name:'海绵音乐', url:'https://haimian.com', note:'字节出品，国内可用' }] },
+  { name:'Udio', cat:'AI音频', acc:'no', price:'¥72/月 ($10)',
+    desc:'AI 音乐生成。音质最干净，支持人声+伴奏分离。国内无法直接访问。',
+    note:'需特殊网络环境',
+    alts:[{ name:'海绵音乐', url:'https://haimian.com', note:'免费替代' }] },
+  { name:'海螺AI', cat:'AI音频', acc:'yes', price:'免费',
+    desc:'MiniMax 出品。AI 语音合成、克隆，中文效果一流。国内直接可用。',
+    note:'国内直接访问',
     alts:[] },
-  { name:'GPT-SoVITS', cat:'AI音频', acc:'yes', priceUSD:'开源免费', priceCNY:'免费',
-    desc:'开源中文语音克隆。少样本声音复刻，B站教程多，本地部署。',
-    url:'github.com/RVC-Boss/GPT-SoVITS', vpn:'无需',
+  { name:'GPT-SoVITS', cat:'AI音频', acc:'yes', price:'开源免费',
+    desc:'开源中文语音克隆。少样本声音复刻，B站教程多。国内直接可用。',
+    note:'国内直接可用，本地部署',
     alts:[] },
 
   // ---- AI 搜索/研究 ----
-  { name:'Perplexity', cat:'AI搜索', acc:'no', priceUSD:'$20/月', priceCNY:'¥143/月',
-    desc:'AI 搜索引擎。实时搜索+AI 总结，带引用来源。研究必备。',
-    url:'perplexity.ai', vpn:'🔒 需特殊网络',
-    alts:[{ name:'秘塔AI搜索', url:'metaso.cn', note:'国产替代，中文搜索更强' }] },
-  { name:'秘塔AI搜索', cat:'AI搜索', acc:'yes', priceUSD:'免费', priceCNY:'免费',
-    desc:'国产 AI 搜索引擎。中文搜索+AI 总结，国内直接可用，学术搜索强。',
-    url:'metaso.cn', vpn:'无需',
+  { name:'Perplexity', cat:'AI搜索', acc:'no', price:'¥143/月 ($20)',
+    desc:'AI 搜索引擎。实时搜索+AI 总结，带引用来源。国内无法直接访问。',
+    note:'需特殊网络环境',
+    alts:[{ name:'秘塔AI搜索', url:'https://metaso.cn', note:'国产替代，中文更强' }] },
+  { name:'秘塔AI搜索', cat:'AI搜索', acc:'yes', price:'免费',
+    desc:'国产 AI 搜索引擎。中文搜索+AI 总结，学术搜索强。国内直接可用。',
+    note:'国内直接访问',
     alts:[] },
-  { name:'Google AI Overview', cat:'AI搜索', acc:'no', priceUSD:'免费', priceCNY:'免费',
-    desc:'Google 搜索内置 AI 摘要。搜索结果顶部 AI 总结。',
-    url:'google.com', vpn:'🔒 需特殊网络',
-    alts:[{ name:'秘塔AI搜索', url:'metaso.cn', note:'效果接近' }] },
-  { name:'NotebookLM', cat:'AI搜索', acc:'no', priceUSD:'免费', priceCNY:'免费',
-    desc:'Google AI 笔记。上传文档，AI 生成摘要/播客/问答。',
-    url:'notebooklm.google.com', vpn:'🔒 需特殊网络',
-    alts:[{ name:'Kimi', url:'kimi.moonshot.cn', note:'长文档分析能力接近' }] },
+  { name:'NotebookLM', cat:'AI搜索', acc:'no', price:'免费',
+    desc:'Google AI 笔记。上传文档，AI 生成摘要/播客。国内无法直接访问。',
+    note:'需特殊网络环境',
+    alts:[{ name:'Kimi', url:'https://kimi.moonshot.cn', note:'长文档分析能力接近' }] },
 
-  // ---- AI 办公效率 ----
-  { name:'Notion AI', cat:'AI办公', acc:'partial', priceUSD:'$10/月', priceCNY:'¥72/月',
-    desc:'Notion 内置 AI。自动总结、翻译、写作，知识库+AI 一体。',
-    url:'notion.so', vpn:'Notion 国内基本可用，偶尔慢',
-    alts:[{ name:'飞书文档', url:'feishu.cn', note:'飞书内置 AI，免费' }] },
-  { name:'Gamma', cat:'AI办公', acc:'no', priceUSD:'$10/月', priceCNY:'¥72/月',
-    desc:'AI 生成 PPT/网页/文档。一句话生成精美演示文稿。',
-    url:'gamma.app', vpn:'🔒 需特殊网络',
-    alts:[{ name:'AiPPT', url:'www.aippt.cn', note:'国产 AI PPT，免费额度' }] },
-  { name:'Devin', cat:'AI办公', acc:'no', priceUSD:'$500/月', priceCNY:'¥3600/月',
-    desc:'全球首个 AI 软件工程师。自主完成开发任务，全自动。',
-    url:'cognition.ai', vpn:'🔒 需特殊网络',
-    alts:[{ name:'通义灵码', url:'tongyi.aliyun.com/lingma', note:'免费，但非全自动' }] },
-  { name:'Canva AI', cat:'AI办公', acc:'partial', priceUSD:'免费/付费', priceCNY:'免费',
-    desc:'Canva 内置 AI 设计工具。AI 生成设计、修图、视频剪辑。',
-    url:'canva.com', vpn:'国内可用，但部分 AI 功能🔒 需特殊网络',
-    alts:[{ name:'稿定设计', url:'gaoding.com', note:'国产平替，AI 功能齐全' }] },
+  // ---- AI 办公/设计 ----
+  { name:'Notion AI', cat:'AI办公', acc:'partial', price:'¥72/月 ($10)',
+    desc:'Notion 内置 AI。自动总结、翻译、写作，知识库+AI。国内部分可用。',
+    note:'基本可用，偶尔慢',
+    alts:[{ name:'飞书文档', url:'https://feishu.cn', note:'飞书内置 AI，免费' }] },
+  { name:'Gamma', cat:'AI办公', acc:'no', price:'¥72/月 ($10)',
+    desc:'AI 生成 PPT/网页/文档。一句话→精美演示。国内无法直接访问。',
+    note:'需特殊网络环境',
+    alts:[{ name:'AiPPT', url:'https://www.aippt.cn', note:'国产 AI PPT，免费额度' }] },
+  { name:'Canva AI', cat:'AI办公', acc:'partial', price:'免费/付费',
+    desc:'Canva 内置 AI。AI 设计、修图、视频。国内部分可用。',
+    note:'国内可用，部分 AI 功能受限',
+    alts:[{ name:'稿定设计', url:'https://gaoding.com', note:'国产平替，AI 功能齐全' }] },
+  { name:'Figma AI', cat:'AI办公', acc:'partial', price:'¥86/月 ($12)',
+    desc:'Figma 内置 AI。AI 生成设计、组件。国内部分可用。',
+    note:'基础功能国内可用，AI 功能可能受限',
+    alts:[{ name:'即时设计', url:'https://js.design', note:'国产 Figma，免费' }] },
+  { name:'即时设计', cat:'AI办公', acc:'yes', price:'免费',
+    desc:'国产协作设计工具。AI 设计+生成功能，Figma 平替。国内直接可用。',
+    note:'国内直接访问',
+    alts:[] },
+  { name:'Galileo AI', cat:'AI办公', acc:'no', price:'¥115/月 ($16)',
+    desc:'AI UI 设计。文字→高保真界面设计稿。国内无法直接访问。',
+    note:'需特殊网络环境',
+    alts:[{ name:'即时设计', url:'https://js.design', note:'国产 Figma+AI' }] },
+  { name:'Devin', cat:'AI办公', acc:'no', price:'¥3600/月 ($500)',
+    desc:'全球首个 AI 软件工程师。自主完成开发任务。国内无法直接访问。',
+    note:'需特殊网络环境，价格极高',
+    alts:[{ name:'通义灵码', url:'https://tongyi.aliyun.com/lingma', note:'免费，但非全自动' }] },
+  { name:'Uizard', cat:'AI办公', acc:'no', price:'¥86/月 ($12)',
+    desc:'AI 原型设计。手绘草图→可交互原型。国内无法直接访问。',
+    note:'需特殊网络环境',
+    alts:[{ name:'墨刀', url:'https://modao.cc', note:'国产原型工具' }] },
 
   // ---- AI Agent/自动化 ----
-  { name:'n8n', cat:'AI自动化', acc:'yes', priceUSD:'开源免费', priceCNY:'免费',
-    desc:'开源工作流自动化。AI Agent 编排，连接 400+ 服务，可自部署。',
-    url:'n8n.io', vpn:'无需',
+  { name:'Dify', cat:'AI自动化', acc:'yes', price:'开源免费',
+    desc:'国产 AI 应用开发平台。LLM 编排+RAG+Agent，企业级。国内直接可用。',
+    note:'国内直接访问',
     alts:[] },
-  { name:'Dify', cat:'AI自动化', acc:'yes', priceUSD:'开源免费', priceCNY:'免费',
-    desc:'国产 AI 应用开发平台。LLM 编排+RAG+Agent，企业级功能。',
-    url:'dify.ai', vpn:'无需',
+  { name:'Coze', cat:'AI自动化', acc:'yes', price:'免费',
+    desc:'字节跳动 AI Bot 平台。零代码搭 AI 机器人，接飞书/微信/抖音。国内直接可用。',
+    note:'国内直接访问',
     alts:[] },
-  { name:'Coze', cat:'AI自动化', acc:'yes', priceUSD:'免费', priceCNY:'免费',
-    desc:'字节跳动 AI Bot 平台。零代码搭建 AI 机器人，接飞书/微信/抖音。',
-    url:'www.coze.cn', vpn:'无需',
+  { name:'n8n', cat:'AI自动化', acc:'yes', price:'开源免费',
+    desc:'开源工作流自动化。AI Agent 编排，400+ 服务连接。国内直接可用。',
+    note:'国内直接访问，可自部署',
     alts:[] },
-  { name:'扣子', cat:'AI自动化', acc:'yes', priceUSD:'免费', priceCNY:'免费',
-    desc:'Coze 国内版。零代码搭建 AI Bot，可发布到飞书/微信/抖音。',
-    url:'www.coze.cn', vpn:'无需',
-    alts:[] },
-
-  // ---- 更多国产大模型 ----
-  { name:'讯飞星火', cat:'大语言模型', acc:'yes', priceUSD:'免费', priceCNY:'免费',
-    desc:'科大讯飞出品。语音识别+大模型一体，教育、办公场景强。',
-    url:'xinghuo.xfyun.cn', vpn:'无需',
-    alts:[] },
-  { name:'智谱清言', cat:'大语言模型', acc:'yes', priceUSD:'免费', priceCNY:'免费',
-    desc:'智谱AI（清华系）。ChatGLM 系列模型，学术出身，代码能力好。',
-    url:'chatglm.cn', vpn:'无需',
-    alts:[] },
-  { name:'腾讯混元', cat:'大语言模型', acc:'yes', priceUSD:'免费', priceCNY:'免费',
-    desc:'腾讯大模型。与微信/企业微信深度整合，腾讯云生态。',
-    url:'hunyuan.tencent.com', vpn:'无需',
-    alts:[] },
-  { name:'百川智能', cat:'大语言模型', acc:'yes', priceUSD:'免费', priceCNY:'免费',
-    desc:'王小川（搜狗创始人）出品。医疗、法律领域能力强。',
-    url:'baichuan-ai.com', vpn:'无需',
-    alts:[] },
-  { name:'MiniMax', cat:'大语言模型', acc:'yes', priceUSD:'免费', priceCNY:'免费',
-    desc:'MiniMax 出品（海螺AI同公司）。万亿参数 MoE 模型，语音合成一流。',
-    url:'hailuoai.com', vpn:'无需',
-    alts:[] },
-  { name:'零一万物', cat:'大语言模型', acc:'yes', priceUSD:'开源免费', priceCNY:'免费',
-    desc:'李开复出品。Yi 系列开源模型，中英文俱佳。',
-    url:'01.ai', vpn:'无需',
-    alts:[] },
-  { name:'阶跃星辰', cat:'大语言模型', acc:'yes', priceUSD:'免费', priceCNY:'免费',
-    desc:'Step 系列模型。多模态能力强，图片理解/VL 模型领先。',
-    url:'stepfun.com', vpn:'无需',
-    alts:[] },
-  { name:'腾讯元宝', cat:'大语言模型', acc:'yes', priceUSD:'免费', priceCNY:'免费',
-    desc:'腾讯 AI 助手。公众号内容搜索是独家优势，微信生态整合。',
-    url:'yuanbao.tencent.com', vpn:'无需',
-    alts:[] },
-
-  // ---- AI 图像补充 ----
-  { name:'Leonardo AI', cat:'AI图像', acc:'no', priceUSD:'$12/月', priceCNY:'¥86/月',
-    desc:'游戏资产生成专用 AI。角色、场景、道具一站式生成。',
-    url:'leonardo.ai', vpn:'🔒 需特殊网络',
-    alts:[{ name:'LiblibAI', url:'www.liblib.ai', note:'国内最大 SD 社区' }] },
-  { name:'Civitai', cat:'AI图像', acc:'no', priceUSD:'免费', priceCNY:'免费',
-    desc:'全球最大 AI 模型分享社区。SD Checkpoint/LoRA 下载。',
-    url:'civitai.com', vpn:'🔒 需特殊网络',
-    alts:[{ name:'LiblibAI', url:'www.liblib.ai', note:'国内模型下载首选' }] },
-  { name:'Adobe Firefly', cat:'AI图像', acc:'no', priceUSD:'$5/月', priceCNY:'¥36/月',
-    desc:'Adobe AI 图像工具。Photoshop 内集成，商用安全（版权清晰）。',
-    url:'firefly.adobe.com', vpn:'🔒 需特殊网络',
-    alts:[{ name:'通义万相', url:'tongyi.aliyun.com/wanxiang', note:'免费商用' }] },
-
-  // ---- AI 编程补充 ----
-  { name:'Windsurf', cat:'AI编程', acc:'no', priceUSD:'$15/月', priceCNY:'¥108/月',
-    desc:'Codeium 出品 AI IDE。Flow 模式自动分析全仓库上下文，Agent 能力强。',
-    url:'windsurf.com', vpn:'🔒 需特殊网络',
-    alts:[{ name:'Cursor', url:'cursor.com', note:'类似体验，注册门槛低' }] },
-  { name:'v0.dev', cat:'AI编程', acc:'no', priceUSD:'$20/月', priceCNY:'¥143/月',
-    desc:'Vercel 出品。自然语言生成前端 UI，React/Tailwind 代码直接复制。',
-    url:'v0.dev', vpn:'🔒 需特殊网络',
-    alts:[{ name:'通义灵码', url:'tongyi.aliyun.com/lingma', note:'有 UI 生成能力' }] },
-  { name:'Bolt.new', cat:'AI编程', acc:'no', priceUSD:'$20/月', priceCNY:'¥143/月',
-    desc:'StackBlitz 出品。一句话生成全栈 Web 应用，浏览器内即时预览。',
-    url:'bolt.new', vpn:'🔒 需特殊网络',
-    alts:[] },
-  { name:'Replit Agent', cat:'AI编程', acc:'no', priceUSD:'$25/月', priceCNY:'¥180/月',
-    desc:'Replit AI 编程助手。说人话→写完整应用，在线 IDE 一键部署。',
-    url:'replit.com', vpn:'🔒 需特殊网络',
-    alts:[] },
-  { name:'Lovable', cat:'AI编程', acc:'no', priceUSD:'$20/月', priceCNY:'¥143/月',
-    desc:'AI 全栈应用生成器。GPT-5 驱动，一句话生成 SaaS 产品原型。',
-    url:'lovable.dev', vpn:'🔒 需特殊网络',
-    alts:[] },
-
-  // ---- AI 视频补充 ----
-  { name:'HeyGen', cat:'AI视频', acc:'no', priceUSD:'$29/月', priceCNY:'¥208/月',
-    desc:'AI 数字人视频。照片生成说话视频，口型同步技术领先。',
-    url:'heygen.com', vpn:'🔒 需特殊网络',
-    alts:[{ name:'智影', url:'zenvideo.qq.com', note:'腾讯出品，数字人免费' }] },
-  { name:'Synthesia', cat:'AI视频', acc:'no', priceUSD:'$29/月', priceCNY:'¥208/月',
-    desc:'企业级 AI 数字人。140+ 语言，培训视频/营销视频批量制作。',
-    url:'synthesia.io', vpn:'🔒 需特殊网络',
-    alts:[{ name:'智影', url:'zenvideo.qq.com', note:'免费替代' }] },
-  { name:'智影', cat:'AI视频', acc:'yes', priceUSD:'免费', priceCNY:'免费',
-    desc:'腾讯 AI 数字人视频工具。虚拟主播、数字人播报，免费额度大。',
-    url:'zenvideo.qq.com', vpn:'无需',
-    alts:[] },
-
-  // ---- AI 游戏开发 ----
-  { name:'Inworld AI', cat:'AI 3D/游戏', acc:'no', priceUSD:'免费/付费', priceCNY:'免费',
-    desc:'游戏 NPC AI 引擎。为 NPC 赋予性格、记忆、实时对话能力。',
-    url:'inworld.ai', vpn:'🔒 需特殊网络',
-    alts:[{ name:'Dify', url:'dify.ai', note:'自建 NPC 对话系统' }] },
-  { name:'Convai', cat:'AI 3D/游戏', acc:'no', priceUSD:'免费/付费', priceCNY:'免费',
-    desc:'NPC 对话 AI 平台。接 Unity/Unreal，NPC 自主感知环境+对话。',
-    url:'convai.com', vpn:'🔒 需特殊网络',
-    alts:[] },
-  { name:'NVIDIA ACE', cat:'AI 3D/游戏', acc:'no', priceUSD:'按量', priceCNY:'按量',
-    desc:'NVIDIA 游戏 AI 平台。数字人+NPC+实时语音，RTX 加持。',
-    url:'nvidia.com/ace', vpn:'🔒 需特殊网络',
-    alts:[] },
-  { name:'Scenario', cat:'AI 3D/游戏', acc:'no', priceUSD:'免费/付费', priceCNY:'免费',
-    desc:'AI 游戏资产生成。训练自己的风格模型，批量出游戏素材。',
-    url:'scenario.com', vpn:'🔒 需特殊网络',
-    alts:[{ name:'LiblibAI', url:'www.liblib.ai', note:'LoRA 训练替代' }] },
-  { name:'Plask', cat:'AI 3D/游戏', acc:'no', priceUSD:'免费/付费', priceCNY:'免费',
-    desc:'AI 动作捕捉。浏览器内视频转 3D 动画，独立游戏开发神器。',
-    url:'plask.ai', vpn:'部分可用',
-    alts:[{ name:'Move One', url:'move.ai', note:'功能类似' }] },
-  { name:'Promethean AI', cat:'AI 3D/游戏', acc:'no', priceUSD:'免费', priceCNY:'免费',
-    desc:'AI 3D 场景搭建。一句话生成游戏关卡/场景布局。',
-    url:'prometheanai.com', vpn:'🔒 需特殊网络',
-    alts:[] },
-
-  // ---- AI 设计 ----
-  { name:'Galileo AI', cat:'AI办公', acc:'no', priceUSD:'$16/月', priceCNY:'¥115/月',
-    desc:'AI UI 设计。文字描述生成高保真界面设计稿，Figma 可编辑。',
-    url:'usegalileo.ai', vpn:'🔒 需特殊网络',
-    alts:[{ name:'即时设计', url:'js.design', note:'国产 Figma+AI 功能' }] },
-  { name:'Uizard', cat:'AI办公', acc:'no', priceUSD:'$12/月', priceCNY:'¥86/月',
-    desc:'AI 原型设计。手绘草图→可交互原型，产品经理最爱。',
-    url:'uizard.io', vpn:'🔒 需特殊网络',
-    alts:[{ name:'墨刀', url:'modao.cc', note:'国产原型工具' }] },
-  { name:'Figma AI', cat:'AI办公', acc:'partial', priceUSD:'$12/月', priceCNY:'¥86/月',
-    desc:'Figma 内置 AI。自动生成设计、重命名图层、一键生成组件。',
-    url:'figma.com', vpn:'Figma 国内可用，AI 功能🔒 需特殊网络',
-    alts:[{ name:'即时设计', url:'js.design', note:'国产 Figma，免费' }] },
-  { name:'即时设计', cat:'AI办公', acc:'yes', priceUSD:'免费', priceCNY:'免费',
-    desc:'国产协作设计工具（Figma 平替）。内置 AI 设计+生成功能。',
-    url:'js.design', vpn:'无需',
-    alts:[] },
-
-  // ---- 模型平台/社区 ----
-  { name:'Hugging Face', cat:'AI编程', acc:'no', priceUSD:'免费', priceCNY:'免费',
-    desc:'全球最大 AI 模型库。百万模型/数据集，AI 开发者必备。',
-    url:'huggingface.co', vpn:'🔒 需特殊网络',
-    alts:[{ name:'ModelScope', url:'modelscope.cn', note:'阿里出品，国内可用' }] },
-  { name:'ModelScope', cat:'AI编程', acc:'yes', priceUSD:'免费', priceCNY:'免费',
-    desc:'阿里魔搭社区。国内最大 AI 模型库，千款模型免费下载。',
-    url:'modelscope.cn', vpn:'无需',
-    alts:[] },
-  { name:'Replicate', cat:'AI编程', acc:'no', priceUSD:'按量', priceCNY:'按量',
-    desc:'AI 模型云平台。一行代码调用万种模型，按使用量付费。',
-    url:'replicate.com', vpn:'🔒 需特殊网络',
-    alts:[{ name:'ModelScope', url:'modelscope.cn', note:'国内替代' }] },
-  { name:'OpenRouter', cat:'AI编程', acc:'no', priceUSD:'按量', priceCNY:'按量',
-    desc:'统一 LLM API 网关。一个 Key 调 200+ 模型，比官方更便宜。',
-    url:'openrouter.ai', vpn:'🔒 需特殊网络',
+  { name:'Replicate', cat:'AI自动化', acc:'no', price:'按量',
+    desc:'AI 模型云平台。一行代码调用万种模型。国内无法直接访问。',
+    note:'需特殊网络环境',
+    alts:[{ name:'ModelScope', url:'https://modelscope.cn', note:'国内替代' }] },
+  { name:'OpenRouter', cat:'AI自动化', acc:'no', price:'按量',
+    desc:'统一 LLM API 网关。一个 Key 调 200+ 模型。国内无法直接访问。',
+    note:'需特殊网络环境',
     alts:[] },
 ];
 
-// ===== STATE =====
+// State
 let activeCat = '全部';
 let searchQuery = '';
-
-// ===== CATEGORIES =====
 const cats = ['全部', ...new Set(tools.map(t => t.cat))];
 
-// ===== RENDER =====
-function render() {
+document.getElementById('total-count').textContent = tools.length;
+
+function render(){
   searchQuery = document.getElementById('search').value.trim().toLowerCase();
+  let list = tools;
+  if(activeCat !== '全部') list = list.filter(t => t.cat === activeCat);
+  if(searchQuery) list = list.filter(t =>
+    t.name.toLowerCase().includes(searchQuery) || t.desc.includes(searchQuery) ||
+    t.cat.includes(searchQuery) || t.alts.some(a => a.name.includes(searchQuery)));
 
-  // Filter
-  let filtered = tools;
-  if (activeCat !== '全部') filtered = filtered.filter(t => t.cat === activeCat);
-  if (searchQuery) filtered = filtered.filter(t =>
-    t.name.toLowerCase().includes(searchQuery) ||
-    t.desc.toLowerCase().includes(searchQuery) ||
-    t.cat.toLowerCase().includes(searchQuery) ||
-    t.alts.some(a => a.name.toLowerCase().includes(searchQuery))
-  );
+  const ok = list.filter(t => t.acc === 'yes').length;
+  const mid = list.filter(t => t.acc === 'partial').length;
+  const bad = list.filter(t => t.acc === 'no').length;
 
-  // Header stats
-  const okCount = tools.filter(t => t.acc === 'yes').length;
-  const midCount = tools.filter(t => t.acc === 'partial').length;
-  const noCount = tools.filter(t => t.acc === 'no').length;
-  document.getElementById('header-stats').innerHTML =
-    `共 <b>${tools.length}</b> 个工具 | <span style="color:var(--green)">✅ ${okCount} 国内可用</span> | <span style="color:var(--yellow)">⚠️ ${midCount} 部分可用</span> | <span style="color:var(--red)">🚫 ${noCount} 🔒 需特殊网络</span>`;
-
-  // Category filters
+  // Filters
   document.getElementById('filters').innerHTML = cats.map(c => {
-    const count = c === '全部' ? tools.length : tools.filter(t => t.cat === c).length;
-    return `<span class="filter-tag${c === activeCat ? ' active' : ''}" onclick="setCat('${c}')">${c} (${count})</span>`;
+    const n = c === '全部' ? tools.length : tools.filter(t => t.cat === c).length;
+    return `<span class="f-btn${c===activeCat?' on':''}" onclick="setCat('${c}')">${c} (${n})</span>`;
   }).join('');
 
-  // Stats row
-  const fOk = filtered.filter(t => t.acc === 'yes').length;
-  const fMid = filtered.filter(t => t.acc === 'partial').length;
-  const fNo = filtered.filter(t => t.acc === 'no').length;
-  document.getElementById('stats-row').innerHTML = `
-    <div class="stat-card green"><div class="num">${fOk}</div><div class="label">✅ 国内直接能用</div></div>
-    <div class="stat-card yellow"><div class="num">${fMid}</div><div class="label">⚠️ 部分可用/需技巧</div></div>
-    <div class="stat-card red"><div class="num">${fNo}</div><div class="label">🚫 暂不可用</div></div>
-    <div class="stat-card"><div class="num">${fOk + fMid + fNo}</div><div class="label">📊 当前筛选结果</div></div>
+  // Stats
+  document.getElementById('stats').innerHTML = `
+    <div class="s-card ok"><div class="num">${ok}</div><div class="lbl">✅ 国内直接可用</div></div>
+    <div class="s-card mid"><div class="num">${mid}</div><div class="lbl">⚠️ 部分可用</div></div>
+    <div class="s-card bad"><div class="num">${bad}</div><div class="lbl">🔒 暂不可用</div></div>
+    <div class="s-card"><div class="num">${ok+mid+bad}</div><div class="lbl">📊 筛选结果</div></div>
   `;
 
-  // Tool cards
-  if (filtered.length === 0) {
-    document.getElementById('tools-grid').innerHTML = '';
-    document.getElementById('no-results').style.display = 'block';
-  } else {
-    document.getElementById('no-results').style.display = 'none';
-    document.getElementById('tools-grid').innerHTML = filtered.map(t => {
-      const accBadge = t.acc === 'yes' ? `<span class="badge badge-ok">✅ 国内可用</span>`
-        : t.acc === 'partial' ? `<span class="badge badge-mid">⚠️ 部分可用</span>`
-        : `<span class="badge badge-no">🚫 🔒 需特殊网络</span>`;
-      const altsHTML = t.alts.length > 0 ? `
-        <div class="alt-section">
-          <div class="alt-title">🇨🇳 国产替代方案</div>
-          ${t.alts.map(a => `
-            <div class="alt-item">
-              <a href="https://${a.url}" target="_blank" rel="noopener">${a.name}</a>
-              <span class="alt-note">${a.note}</span>
-            </div>`).join('')}
-        </div>` : (t.acc === 'yes' ? '' : '<div class="alt-section"><div class="alt-title" style="color:var(--yellow)">⚠️ 暂无成熟国产替代</div></div>');
-      return `
-        <div class="tool-card">
-          <div class="tool-header">
-            <div>
-              <div class="tool-name">${t.name}</div>
-              <div class="tool-cat">${t.cat}</div>
-            </div>
-            ${accBadge}
-          </div>
-          <div class="tool-desc">${t.desc}</div>
-          <div class="tool-meta">
-            <span class="badge badge-tag">🔗 ${t.url}</span>
-            <span class="badge badge-tag">💰 ${t.priceCNY || t.priceUSD}</span>
-          </div>
-          ${t.acc !== 'yes' ? `<div class="price-row">🔧 ${t.vpn}</div>` : ''}
-          ${altsHTML}
-        </div>`;
-    }).join('');
-  }
+  // Cards
+  document.getElementById('grid').innerHTML = list.map(t => {
+    const badge = t.acc === 'yes' ? `<span class="card-badge badge-ok">✅ 国内可用</span>`
+      : t.acc === 'partial' ? `<span class="card-badge badge-mid">⚠️ 部分可用</span>`
+      : `<span class="card-badge badge-no">🔒 暂不可用</span>`;
+    const altsHTML = t.alts.length ? `
+      <div class="alts">
+        <div class="alts-title">🇨🇳 国产替代</div>
+        ${t.alts.map(a => `<div class="alt-row"><a href="${a.url}" target="_blank" rel="noopener">${a.name}</a><span>${a.note}</span></div>`).join('')}
+      </div>` : (t.acc === 'yes' ? '' : '<div class="alts"><div class="alts-title" style="color:var(--yellow)">⚠️ 暂无成熟国产替代</div></div>');
+    return `
+    <div class="card">
+      <div class="card-top"><div class="card-name">${t.name}</div>${badge}</div>
+      <div class="card-cat">${t.cat}</div>
+      <div class="card-desc">${t.desc}</div>
+      ${t.note ? `<div class="card-note">💡 ${t.note}</div>` : ''}
+      <div class="card-row"><span class="tag">💰 ${t.price}</span></div>
+      ${altsHTML}
+    </div>`;
+  }).join('');
 }
 
-function setCat(cat) {
-  activeCat = cat;
-  render();
-  document.getElementById('search').focus();
-}
+function setCat(c){activeCat = c;render();}
 
 // Init
 render();
-document.getElementById('search').addEventListener('input', render);
 </script>
 </body>
 </html>
