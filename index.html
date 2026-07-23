@@ -128,9 +128,26 @@ footer{
 footer a{color:var(--accent2)}
 
 @media(max-width:768px){
-  .grid{grid-template-columns:1fr}
-  .stats{grid-template-columns:repeat(2,1fr)}
-  .hero{padding:32px 0 20px}
+  body{font-size:14px}
+  .container{padding:0 12px}
+  .hero{padding:24px 0 16px}
+  .hero h1{font-size:22px}
+  .hero p{font-size:13px}
+  .search-wrap{max-width:100%}
+  .search-wrap input{padding:12px 40px 12px 14px;font-size:14px}
+  .filters{gap:5px;justify-content:flex-start}
+  .f-btn{padding:5px 10px;font-size:11px}
+  .stats{grid-template-columns:repeat(2,1fr);gap:8px}
+  .s-card{padding:12px}
+  .s-card .num{font-size:24px}
+  .grid{grid-template-columns:1fr;gap:10px}
+  .card{padding:14px 16px}
+  .card-name{font-size:15px}
+  .card-desc{font-size:12px}
+  .card-row{gap:4px}
+  .tag{padding:3px 8px;font-size:10px}
+  .alt-row{font-size:11px;flex-wrap:wrap}
+  footer{padding:24px 12px;font-size:10px}
 }
 </style>
 </head>
